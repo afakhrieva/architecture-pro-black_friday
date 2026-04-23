@@ -1,3 +1,8 @@
+## Задание 1. Планирование
+[task1.drawio](Task1-drawio/task1.drawio) \
+Схема итогового решения - лист `step-3 (final)` \
+![Task1-final-scheme.png](Task1-drawio/Task1-final-scheme.png)
+
 # pymongo-api
 
 ## Как запустить
