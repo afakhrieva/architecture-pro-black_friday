@@ -21,7 +21,7 @@ docker compose up -d
 Для быстрой настройки шардирования выполните:
 
 ```bash
-sh scripts/init-sharding.sh
+sh ./scripts/init-sharding.sh
 ```
 
 ## Ручная инициализация по шагам
