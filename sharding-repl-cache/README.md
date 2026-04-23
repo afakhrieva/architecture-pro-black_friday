@@ -9,7 +9,7 @@
 - **Кэш Redis**: 1 узел (`redis`)
 - **API сервис**: `pymongo_api`
 
-![Task1-final-scheme.png](../Task1-drawio/Task1-step-3-final.png)
+![Task1-step-3.png](../drawio/Task1-step-3.png)
 
 ### Запуск
 

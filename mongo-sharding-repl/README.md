@@ -8,7 +8,7 @@
 - **Маршрутизатор mongos**: 1 узел (`mongos_router`)
 - **API сервис**: `pymongo_api`
 
-![Task1-step-2.png](../Task1-drawio/Task1-step-2.png)
+![Task1-step-2.png](../drawio/Task1-step-2.png)
 
 ### Запуск
 
