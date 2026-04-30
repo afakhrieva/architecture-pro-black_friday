@@ -28,7 +28,7 @@
 
 ### Схема документа
 
-```
+```javascript
 {
   _id: ObjectId,                  // уникальный идентификатор заказа
   user_id: string,                // идентификатор клиента
@@ -157,7 +157,7 @@ db.orders.createIndex({ user_id: 1, order_date: -1 });
 
 ### Схема документа
 
-```
+```javascript
 {
   _id: ObjectId,                 // уникальный идентификатор товара
   name: string,                  // наименование
@@ -188,7 +188,7 @@ db.products.updateOne(
 );
 ```
 - **Поиск товаров по категориям и фильтрация по диапазону цен** - `find({ category: "...", price: { $gte: ... } })`
-```
+```javascript
 db.products.find(
   { category: "electronics", price: { $gte: 10000, $lte: 50000 } }
 ).sort({ price: 1 });
@@ -248,7 +248,7 @@ db.products.createIndex({ category: 1, price: 1 });
 
 ### Схема документа
 
-```
+```javascript
 {
   _id: ObjectId,                     // уникальный идентификатор корзины
   user_id: string,                   // идентификатор пользователя (null для гостей)
@@ -491,7 +491,7 @@ mongodb-exporter:
 
 Пример настройки алерта в Prometheus - max/min размер коллекции на шардах отличаются более чем в 2 раза:
 
-```
+```yaml
 - alert: ShardDataImbalance
   expr: max by(shard) (mongodb_collection_size{collection="products"}) / min by(shard) (mongodb_collection_size{collection="products"}) > 2
   for: 10m
@@ -507,7 +507,7 @@ mongodb-exporter:
 
 Пошаговая процедура (онлайн-миграция):
 
-```
+```javascript
 // 1. Создать новую коллекцию с нужным шард-ключом
 sh.shardCollection("mobile_world.products_new", { category: 1, _id: 1 });
 
@@ -533,7 +533,7 @@ db.products_new.renameCollection("products");
 - Назначить зоны для каждой подкатегории, привязав их к разным шардам.
 - Включить балансировщик — он сам начнёт мигрировать чанки согласно зонам.
 
-```
+```javascript
 // 1. Создаём новую коллекцию (или пересоздаём старую) с диапазонным шард-ключом
 sh.shardCollection("mobile_world.products", { category: 1, subcategory: 1 })
 
@@ -566,7 +566,7 @@ sh.updateZoneKeyRange("mobile_world.products", { category: "Electronics", subcat
 
 Также зоны можно использовать для выделения отдельного шарда под категорию "Электроника" без добавления подкатегорий и смены шард-ключа. Это изолирует нагрузку и позволяет независимо масштабировать ресурсы для самой популярной категории.
 
-```
+```javascript
 sh.addShardToZone("shard3", "electronics_zone")
 sh.updateZoneKeyRange("mobile_world.products", { category: "electronics" }, "electronics_zone")
 ```
@@ -771,7 +771,7 @@ CREATE TABLE mobile_world.sessions (
 
 ### Примеры настройки
 
-```
+```sql
 -- Для таблицы с заказами: Read Repair при чтении
 ALTER TABLE orders WITH read_repair = 'BLOCKING';
 
@@ -780,7 +780,7 @@ ALTER TABLE cart_items WITH read_repair = 'NONE';
 ```
 
 Настройка Anti-Entropy Repair через cron:
-```
+```bash
 0 3 * * * nodetool repair -pr -keyspace mobile_world -table orders
 ```
 
